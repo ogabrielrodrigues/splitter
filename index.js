@@ -92,8 +92,5 @@ children.forEach((el) => {
   el.addEventListener("click", selectTip);
 });
 custom_input.addEventListener("keyup", selectTip);
-[bill_input, custom_input].forEach((el) => {
-  el.addEventListener("keyup", checkInput);
-});
 people_input.addEventListener("keyup", caculateTip);
 document.querySelector("#reset").addEventListener("click", resetTip);
