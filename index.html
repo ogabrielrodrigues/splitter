@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/imask"></script>
+  <title>Frontend Mentor | Tip calculator app</title>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            strong: "hsl(172, 67%, 45%)",
+            dark: "hsl(183, 100%, 15%)",
+            grayish: "hsl(184, 14%, 56%)",
+            light: "hsl(185, 41%, 84%)",
+            white: "hsl(0, 0%, 100%)",
+            very: "hsl(189, 41%, 95%)",
+            red: "hsl(0, 100%, 66%)"
+          },
+          fontFamily: {
+            sans: 'Space Mono'
+          },
+          fontSize: {
+            form: '24px'
+          },
+          letterSpacing: {
+            spaced: '4px',
+            medium: '1px' 
+          },
+          screens: {
+            desktop: '1440px'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-screen w-screen">
+  <div class="h-full w-full bg-light flex flex-col items-center justify-center desktop:gap-10 gap-8">
+    
+    <img src="./images/logo.svg" alt="SPLITTER logo" class="pt-8 desktop:py-12">
+
+    <main class="flex flex-col bg-white h-full rounded-t-3xl p-6 gap-4 desktop:flex-row desktop:p-10 desktop:h-auto desktop:rounded-3xl desktop:gap-8 desktop:w-[60vw]">
+      <div class="flex flex-col gap-4 desktop:w-[55%] desktop:gap-8 desktop:px-5">
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between items-center">
+            <label for="bill" class="text-grayish">Bill</label>
+            <span class="text-red text-sm hidden group-[.error]:block">Can't be blank</span>
+          </div>
+          <div class="relative">
+            <input id="bill" type="text" placeholder="0" class="bg-very w-full h-12 text-form text-dark pr-4 text-end rounded-lg focus:outline-2 focus:outline-strong">
+            <img src="./images/icon-dollar.svg" alt="dollar icon" class="absolute top-[35%] left-[5%]">
+          </div>
+        </div>
+  
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between items-center">
+            <label for="custom" class="text-grayish">Select Tip %</label>
+            <span class="text-red text-sm hidden group-[.error]:block">Can't be blank</span>
+          </div>          
+          <div id="select_tip" class="grid grid-cols-2 gap-4 desktop:grid-cols-3 group">
+            <button class="text-white bg-dark text-form rounded-lg p-2 cursor-pointer outline-none desktop:p-0 desktop:py-2 group-[.selected1]:bg-strong group-[.selected1]:text-dark transition-colors">5%</button>
+            <button class="text-white bg-dark text-form rounded-lg p-2 cursor-pointer outline-none desktop:p-0 desktop:py-2 group-[.selected2]:bg-strong group-[.selected2]:text-dark transition-colors">10%</button>
+            <button class="text-white bg-dark text-form rounded-lg p-2 cursor-pointer outline-none desktop:p-0 desktop:py-2 group-[.selected3]:bg-strong group-[.selected3]:text-dark transition-colors">15%</button>
+            <button class="text-white bg-dark text-form rounded-lg p-2 cursor-pointer outline-none desktop:p-0 desktop:py-2 group-[.selected4]:bg-strong group-[.selected4]:text-dark transition-colors">25%</button>
+            <button class="text-white bg-dark text-form rounded-lg p-2 cursor-pointer outline-none desktop:p-0 desktop:py-2 group-[.selected5]:bg-strong group-[.selected5]:text-dark transition-colors">50%</button>
+            <input id="custom" type="text" placeholder="Custom" class="placeholder:text-grayish text-form bg-very pr-4 text-end text-dark rounded-lg outline-none group-[.error]:outline-2 group-[.error]:outline-red focus:outline-2 focus:outline-strong">
+          </div>
+        </div>
+  
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-between items-center">
+            <label for="people" class="text-grayish">Number of People</label>
+            <span class="text-red text-sm hidden group-[.error]:block">Can't be blank</span>
+          </div>
+          <div class="relative">
+            <input id="people" type="text" placeholder="0" class="bg-very w-full h-12 text-form text-dark pr-4 text-end rounded-lg focus:outline-2 focus:outline-strong">
+            <img src="./images/icon-person.svg" alt="person icon" class="absolute top-[35%] left-[5%]">
+          </div>
+        </div>
+      </div>
+
+      <div class="desktop:w-[45%]">
+        <div class="flex flex-col bg-dark p-6 h-full rounded-xl desktop:justify-between desktop:p-10 gap-8">
+          <div class="flex flex-col gap-4 desktop:gap-12">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col text-white">
+                <strong>Tip Amount</strong>
+                <span class="text-grayish text-sm">/ person</span>
+              </div>
+              <strong class="text-strong flex">
+                <p class="text-3xl desktop:text-4xl">$</p>
+                <p id="tip_amount" class="text-3xl desktop:text-4xl">0.00</p>
+              </strong>
+            </div>
+    
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col text-white">
+                <strong>Total</strong>
+                <span class="text-grayish text-sm">/ person</span>
+              </div>
+              <strong class="text-strong flex">
+                <p class="text-3xl desktop:text-4xl">$</p>
+                <p id="total" class="text-3xl desktop:text-4xl">0.00</p>
+              </strong>
+            </div>
+          </div>
+  
+          <button id="reset" class="bg-strong w-full p-2 rounded-lg uppercase text-dark text-form cursor-pointer hover:bg-strong/80 outline-none transition-colors">Reset</button>
+      </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./index.js" defer></script>
+</body>
+</html>
