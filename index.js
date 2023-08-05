@@ -32,7 +32,7 @@ const bill_input = document.querySelector("#bill");
 const custom_input = document.querySelector("#custom");
 const people_input = document.querySelector("#people");
 
-function caculateTip(e) {
+function caculateTip() {
   if (tip_percent === "0%") {
     document.querySelector("#select_tip").classList.add("error");
     return;
@@ -50,7 +50,9 @@ function caculateTip(e) {
   document.querySelector("#tip_amount").innerHTML = isNaN(tip_amount)
     ? "0.00"
     : tip_amount.toFixed(2);
-  document.querySelector("#total").innerHTML = tip_total.toFixed(2);
+  document.querySelector("#total").innerHTML = isNaN(tip_total)
+    ? "0.00"
+    : tip_total.toFixed(2);
 }
 
 function resetTip() {
@@ -66,6 +68,7 @@ function resetTip() {
 
   document.querySelector("#tip_amount").innerHTML = "0.00";
   document.querySelector("#total").innerHTML = "0.00";
+  bill_input.focus()
 }
 
 function selectTip(e) {
@@ -86,11 +89,14 @@ function selectTip(e) {
 
     tip_percent = selected_tip;
   }
+
+  caculateTip()
 }
 
 children.forEach((el) => {
   el.addEventListener("click", selectTip);
 });
+bill_input.addEventListener("keyup", caculateTip);
 custom_input.addEventListener("keyup", selectTip);
 people_input.addEventListener("keyup", caculateTip);
 document.querySelector("#reset").addEventListener("click", resetTip);
