@@ -2,7 +2,9 @@
 
 This is a solution to the [Tip calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-![](./images/screenshot.svg)
+<p align="center">
+  <img src="./images/screenshot.svg" alt="Screenshot"/>
+</p>
 
 ### Built with
 
